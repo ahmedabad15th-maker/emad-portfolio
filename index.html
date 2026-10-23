@@ -156,7 +156,21 @@ iframe.preview{width:100%;height:340px;border:1px solid var(--rule);border-radiu
 .editbar.on{display:flex}
 .toast{position:fixed;inset-inline-end:18px;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:90;background:var(--ink);color:var(--paper);padding:8px 16px;border-radius:8px;font-size:14px;font-weight:700;opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}
 .toast.on{opacity:1;transform:none}
-@media (max-width:720px){.form-grid,.split{grid-template-columns:1fr}.assign-body{padding:12px 12px 16px}.assign-head-row{padding:12px 12px}}
+/* published assignments */
+.pub-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:26px 0 0}
+.subhead{margin:0;font-size:19px;display:flex;align-items:center;gap:8px}
+details.admin{margin-top:26px;border:1px dashed var(--rule);border-radius:10px;padding:0 16px 16px;background:color-mix(in srgb,var(--accent) 3%,transparent)}
+details.admin>summary{cursor:pointer;font-weight:700;color:var(--accent);padding:14px 0;font-size:16px;list-style:none}
+details.admin>summary::-webkit-details-marker{display:none}
+details.admin>summary::before{content:"▸ ";display:inline-block;transition:.2s}
+details.admin[open]>summary::before{transform:rotate(90deg)}
+.assign.published{border-inline-start-color:var(--accent)}
+.assign.published .assign-head-row{cursor:default}
+.embed-slot{margin-top:8px}
+.embed-slot iframe{width:100%;height:420px;border:1px solid var(--rule);border-radius:8px;background:#fff}
+.link-item .acts{display:flex;gap:6px;flex-wrap:wrap;margin-inline-start:auto}
+.link-block{display:flex;flex-direction:column;gap:8px}
+@media (max-width:720px){.form-grid,.split{grid-template-columns:1fr}.assign-body{padding:12px 12px 16px}.assign-head-row{padding:12px 12px}.embed-slot iframe{height:300px}}
 </style>
 </head>
 <body>
@@ -244,7 +258,16 @@ iframe.preview{width:100%;height:340px;border:1px solid var(--rule);border-radiu
 
 <section id="assignments">
 <h2 data-en="Assignments &amp; Tasks">الاسيمنتات والتاسكات</h2>
-<p class="txt" data-en="One place to submit your assignments and tasks: upload Word and Excel files, add Google Drive links, and preview your HTML, CSS, JavaScript and C++ code.">مكان واحد لتسليم الاسيمنتات والتاسكات: ارفع ملفات Word و Excel، ضيف لينكات درايف، وشوف أكوادك HTML و CSS و JavaScript و C++ قدامك.</p>
+<p class="txt" data-en="The assignments below are public: anyone with the portfolio link can open them and view the files. To publish a new one, put the files on Google Drive, share them as &quot;Anyone with the link&quot;, then add the link and press publish.">الاسيمنتات اللي تحت <b>منشورة للجميع</b> — أي حد معاه لينك الموقع (زي الدكتور) يقدر يفتحها ويشوف الملفات. عشان تنشر اسيمنت جديد: ارفع ملفاتك على Google Drive، خلي المشاركة «أي حد عنده اللينك»، وبعدين ضيف اللينك واضغط نشر.</p>
+
+<div class="pub-head">
+<h3 class="subhead">📤 <span data-en="Published assignments">الاسيمنتات المنشورة</span></h3>
+<span class="mini" data-en="visible to everyone">ظاهرة لأي حد معاه اللينك</span>
+</div>
+<div class="assign-list" id="public-list"><div class="empty" data-en="Loading…">بيتحمّل…</div></div>
+
+<details class="admin">
+<summary>➕ <span data-en="Owner panel — add / manage assignments">لوحة المالك — إضافة وإدارة الاسيمنتات</span></summary>
 
 <div class="assign-stats">
 <span class="stat"><b id="a-count">0</b><span data-en="assignments">اسيمنت</span></span>
@@ -292,11 +315,12 @@ iframe.preview{width:100%;height:340px;border:1px solid var(--rule);border-radiu
 <div class="submit-row">
 <button class="btn main" type="submit" data-en="Save assignment">حفظ الاسيمنت</button>
 <button class="btn small" type="button" id="reset-btn" data-en="Clear">تفريغ</button>
-<span class="hint" data-en="Files and links are saved inside this browser on this device.">الملفات واللينكات بتتحفظ جوه المتصفح على الجهاز ده.</span>
+<span class="hint" data-en="Drafts are saved inside this browser on this device. Press publish to make them public on the site.">المسودات بتتحفظ جوه المتصفح على الجهاز ده — اضغط «نشر» عشان تظهر للجميع على الموقع.</span>
 </div>
 </form>
 
 <div class="assign-list" id="assign-list"></div>
+</details>
 </section>
 
 <section id="contact" class="contact">
@@ -664,6 +688,7 @@ function card(it){
    '<a class="btn small" target="_blank" rel="noopener" data-share="wa">💬 '+t('إرسال واتساب','WhatsApp')+'</a>'+
    '<a class="btn small" data-share="mail">✉️ '+t('إرسال إيميل','Email')+'</a>'+
    '<button type="button" class="btn small" data-act="copy">📋 '+t('نسخ الملخص','Copy summary')+'</button>'+
+   '<button type="button" class="btn small" data-act="publish" style="border-color:var(--accent);color:var(--accent);font-weight:700">📤 '+t('نشر على الموقع','Publish')+'</button>'+
    '<button type="button" class="btn small" data-act="edit">✏️ '+t('تعديل','Edit')+'</button>'+
    '<button type="button" class="btn small" data-act="del" style="border-color:var(--margin);color:var(--margin)">🗑️ '+t('حذف','Delete')+'</button>'+
   '</div>';
@@ -701,6 +726,7 @@ function card(it){
  $('[data-share="wa"]',body).href='https://wa.me/?text='+encodeURIComponent(txt);
  $('[data-share="mail"]',body).href='mailto:?subject='+encodeURIComponent(it.title)+'&body='+encodeURIComponent(txt);
  $('[data-act="copy"]',body).onclick=function(){copyText(txt);};
+ $('[data-act="publish"]',body).onclick=function(){publish(it);};
  $('[data-act="edit"]',body).onclick=function(){startEdit(it);};
  $('[data-act="del"]',body).onclick=function(){removeItem(it);};
 
@@ -729,6 +755,85 @@ function load(){
  });
 }
 
+/* ---------- published assignments (assignments.json) ---------- */
+var pubItems=[];
+function driveInfo(url){
+ var s=String(url||'');
+ var mf=s.match(/\/folders\/([^\/?#]+)/);
+ if(mf)return {kind:'folder',id:mf[1],embed:'https://drive.google.com/embeddedfolderview?id='+mf[1]+'#list'};
+ var md=s.match(/\/(document|spreadsheets|presentation)\/d\/([^\/?#]+)/);
+ if(md)return {kind:md[1],id:md[2],embed:'https://docs.google.com/'+md[1]+'/d/'+md[2]+'/preview'};
+ var m=s.match(/\/file\/d\/([^\/?#]+)/)||s.match(/[?&]id=([^&]+)/);
+ if(m)return {kind:'file',id:m[1],embed:'https://drive.google.com/file/d/'+m[1]+'/preview'};
+ return null;
+}
+function pubCard(it){
+ var links=(it.links||[]).filter(function(l){return l&&l.url;});
+ var drive=links.filter(function(l){return isDrive(l.url);}).length;
+ var art=document.createElement('article');
+ art.className='assign published open';art.dataset.id=it.id||'';
+ var d=it.createdAt?new Date(it.createdAt):null;
+ art.innerHTML='<div class="assign-head-row"><div style="flex:1;min-width:0">'+
+  '<h3>'+esc(it.title)+'</h3>'+
+  ((it.subject||it.due)?'<div class="subj">'+esc(it.subject||'')+((it.subject&&it.due)?' · ':'')+(it.due?esc(t('التسليم:','Due:')+' '+it.due):'')+'</div>':'')+
+  '<div class="chiprow">'+
+   '<span class="mini">🔗 '+links.length+' '+t('لينك','links')+'</span>'+
+   (drive?'<span class="mini drive">Drive</span>':'')+
+   (d&&!isNaN(d)?'<span class="mini">'+d.toLocaleDateString(isAR()?'ar-EG':'en-GB')+'</span>':'')+
+  '</div></div></div>'+
+  '<div class="assign-body">'+
+   (it.notes?'<p class="txt" style="margin:0 0 12px">'+esc(it.notes)+'</p>':'')+
+   '<div class="link-list"></div>'+
+  '</div>';
+ var list=$('.link-list',art);
+ if(!links.length){list.innerHTML='<div class="empty">'+t('مفيش لينكات في الاسيمنت ده.','No links in this assignment.')+'</div>';}
+ links.forEach(function(l){
+  var block=document.createElement('div');block.className='link-block';
+  var row=document.createElement('div');row.className='link-item';
+  row.innerHTML='<span class="ico">'+(isDrive(l.url)?'🟢':'🔗')+'</span>'+
+   (l.label?'<span class="mini">'+esc(l.label)+'</span>':'')+
+   '<a href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(l.url)+'</a>'+
+   '<span class="acts"><a class="btn small" href="'+esc(l.url)+'" target="_blank" rel="noopener">'+t('فتح','Open')+' ↗</a></span>';
+  var info=driveInfo(l.url);
+  if(info){
+   var pv=document.createElement('button');pv.type='button';pv.className='btn small';pv.textContent='👁️ '+t('معاينة','Preview');
+   var slot=document.createElement('div');slot.className='embed-slot';slot.style.display='none';
+   pv.onclick=function(){
+    if(!slot.firstChild){
+     slot.innerHTML='<iframe src="'+esc(info.embed)+'" loading="lazy" allowfullscreen referrerpolicy="no-referrer"></iframe>';
+    }
+    slot.style.display=slot.style.display==='none'?'block':'none';
+   };
+   $('.acts',row).appendChild(pv);
+   block.appendChild(row);block.appendChild(slot);
+  } else block.appendChild(row);
+  list.appendChild(block);
+ });
+ return art;
+}
+function renderPub(){
+ var box=$('#public-list');if(!box)return;
+ if(!pubItems.length){
+  box.innerHTML='<div class="empty">'+t('مفيش اسيمنتات منشورة لحد الآن — أول ما تنشر اسيمنت هيظهر هنا لأي حد يفتح اللينك.','No published assignments yet — once you publish one, it shows here for anyone with the link.')+'</div>';
+  return;
+ }
+ box.innerHTML='';
+ pubItems.forEach(function(it){box.appendChild(pubCard(it));});
+}
+function loadPub(){
+ fetch('assignments.json?v='+Date.now(),{cache:'no-store'})
+  .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+  .then(function(d){pubItems=(d&&Array.isArray(d.items))?d.items:[];renderPub();})
+  .catch(function(){pubItems=[];renderPub();});
+}
+function publish(it){
+ var payload={title:it.title,subject:it.subject||'',due:it.due||'',notes:it.notes||'',links:(it.links||[]).map(function(l){return {label:l.label||'',url:l.url};})};
+ var body='انسخ الجزء اللي تحت زي ما هو (بلوك json) — ماتغيّرش فيه حاجة.\n\n```json\n'+JSON.stringify(payload,null,2)+'\n```';
+ var url='https://github.com/ahmedabad15th-maker/emad-portfolio/issues/new?title='+encodeURIComponent('[اسيمنت] '+(it.title||'assignment'))+'&body='+encodeURIComponent(body);
+ var w=window.open(url,'_blank','noopener');
+ if(!w){copyText(url);toast(t('المتصفح منع النافذة — اللينك اتنسخ، الصقه في تاب جديد.','Popup blocked — link copied, open it in a new tab.'));}
+}
+
 /* ---------- wiring ---------- */
 $('#asg-form').addEventListener('submit',save);
 $('#add-link').addEventListener('click',addLink);
@@ -753,9 +858,10 @@ new MutationObserver(function(){
  Array.prototype.forEach.call(document.querySelectorAll('[data-ph-en]'),function(e){
   e.placeholder=isAR()?(e.getAttribute('data-ph-ar')||''):e.getAttribute('data-ph-en');
  });
- renderPending();renderLinks();renderCards();
+ renderPending();renderLinks();renderCards();renderPub();
 }).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 
+loadPub();
 load();
 })();
 </script>
