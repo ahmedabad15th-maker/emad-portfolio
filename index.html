@@ -94,12 +94,75 @@ footer{padding:26px 0 46px;color:var(--muted);font-size:14px;text-align:center}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (max-width:720px){body{font-size:16px}.hero{grid-template-columns:1fr;padding:34px 20px 44px;padding-inline-start:74px}.photo{order:-1;max-width:200px;justify-self:start}.page::before{inset-inline-start:52px}.page::after{inset-inline-start:58px}nav{gap:12px;font-size:15px}.wa-float{width:52px;height:52px}}
 @media print{nav,.btns,.wa-float,#lang,#theme,.photo::after{display:none!important}body{background:#fff;font-size:14px}body::before{display:none}.page{box-shadow:none;border:1px solid #999;background-image:none}section{padding:18px 0}a{color:inherit}.js .reveal{opacity:1!important;transform:none!important}}
+/* ===== assignments & tasks ===== */
+.assign-stats{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.stat{display:inline-flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:4px 16px;font-size:14px;color:var(--muted)}
+.stat b{color:var(--accent);font-size:17px;line-height:1}
+.form-card{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:20px;box-shadow:var(--shadow)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:14px;font-weight:700;color:var(--muted)}
+.field input,.field textarea,.link-row input{font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--bg);color:var(--ink);width:100%}
+.field input:focus,.field textarea:focus,.link-row input:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.pane{border:1px dashed var(--rule);border-radius:10px;padding:14px;background:color-mix(in srgb,var(--accent) 4%,transparent)}
+.pane h3{margin:0 0 10px;font-size:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.drop{border:2px dashed var(--rule);border-radius:10px;padding:20px 12px;text-align:center;color:var(--muted);cursor:pointer;transition:.2s;font-size:14px;background:var(--paper)}
+.drop:hover,.drop.over{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.drop strong{display:block;margin-bottom:4px}
+.file-list,.link-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.file-item,.link-item{display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:7px 10px;font-size:14px;min-width:0}
+.file-item .ico,.link-item .ico{font-size:16px;flex:none}
+.file-item .name,.link-item a{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;text-decoration:none;color:var(--ink)}
+.link-item a{direction:ltr;text-align:left;color:var(--accent);font-weight:500;font-size:13px}
+.file-item .meta{color:var(--muted);font-size:12px;direction:ltr;white-space:nowrap}
+.icon-btn{font:inherit;background:none;border:0;color:var(--muted);cursor:pointer;border-radius:6px;padding:2px 6px;line-height:1}
+.icon-btn:hover{color:var(--margin);background:color-mix(in srgb,var(--margin) 10%,transparent)}
+.link-row{display:flex;gap:8px;flex-wrap:wrap}
+.link-row input{flex:1;min-width:120px}
+.link-row input.url{direction:ltr;text-align:left}
+.btn.small{padding:7px 14px;font-size:14px;border-width:2px;white-space:nowrap}
+.submit-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.hint{font-size:12px;color:var(--muted);margin:0}
+.assign-list{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+.assign{background:var(--paper);border:1px solid var(--rule);border-inline-start:5px solid var(--gold);border-radius:10px;overflow:hidden;transition:box-shadow .2s}
+.assign.open{box-shadow:var(--shadow)}
+.assign-head-row{display:flex;gap:10px;align-items:flex-start;padding:14px 18px;cursor:pointer}
+.assign-head-row h3{margin:0 0 4px;font-size:18px;word-break:break-word}
+.assign .subj{color:var(--muted);font-size:13px}
+.chiprow{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.mini{font-size:12px;background:var(--bg);border:1px solid var(--rule);border-radius:999px;padding:1px 10px;color:var(--muted);font-weight:500;white-space:nowrap}
+.mini.drive{border-color:var(--green);color:var(--green);font-weight:700}
+.assign-body{display:none;border-top:1px dashed var(--rule);padding:14px 18px 18px}
+.assign.open .assign-body{display:block}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{font:inherit;font-size:13px;font-weight:700;padding:5px 13px;border-radius:999px;border:1px solid var(--rule);background:var(--bg);color:var(--muted);cursor:pointer}
+.tabs button.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.tabpane{display:none}
+.tabpane.on{display:block}
+.codewrap{margin-bottom:14px}
+.codehead{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:13px;flex-wrap:wrap}
+.codehead .fname{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-weight:700;color:var(--accent);direction:ltr}
+.codehead .tail{margin-inline-start:auto;display:flex;gap:6px}
+.codebox{background:#0b1517;border:1px solid #1d3336;border-radius:8px;overflow:auto;max-height:420px}
+.codeinner{display:flex;min-width:max-content}
+.gutter{padding:12px 10px;text-align:right;color:#4d6a6d;user-select:none;font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-size:13px;line-height:1.65;white-space:pre;border-inline-end:1px solid #1d3336;background:#081012}
+.codebox pre{margin:0;padding:12px 16px;white-space:pre;font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-size:13px;line-height:1.65;color:#d9e9e5;direction:ltr;text-align:left}
+.tok-k{color:#7fd3ff}.tok-s{color:#ffd479}.tok-c{color:#739191;font-style:italic}.tok-n{color:#ff9d8a}.tok-f{color:#b6f0a8}
+iframe.preview{width:100%;height:340px;border:1px solid var(--rule);border-radius:8px;background:#fff}
+.empty{color:var(--muted);font-size:14px;text-align:center;padding:16px;border:1px dashed var(--rule);border-radius:8px}
+.editbar{display:none;align-items:center;gap:10px;flex-wrap:wrap;background:color-mix(in srgb,var(--gold) 14%,transparent);border:1px solid var(--gold);border-radius:8px;padding:8px 12px;font-size:14px;margin-bottom:14px}
+.editbar.on{display:flex}
+.toast{position:fixed;inset-inline-end:18px;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:90;background:var(--ink);color:var(--paper);padding:8px 16px;border-radius:8px;font-size:14px;font-weight:700;opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}
+.toast.on{opacity:1;transform:none}
+@media (max-width:720px){.form-grid,.split{grid-template-columns:1fr}.assign-body{padding:12px 12px 16px}.assign-head-row{padding:12px 12px}}
 </style>
 </head>
 <body>
 <main class="wrap">
 <nav aria-label="Navigation">
-<a href="#about" data-en="About">نبذة</a><a href="#education" data-en="Education">التعليم</a><a href="#skills" data-en="Skills">المهارات</a><a href="#services" data-en="Services">الخدمات</a><a href="#projects" data-en="Work">الأعمال</a><a href="#contact" data-en="Contact">تواصل</a>
+<a href="#about" data-en="About">نبذة</a><a href="#education" data-en="Education">التعليم</a><a href="#skills" data-en="Skills">المهارات</a><a href="#services" data-en="Services">الخدمات</a><a href="#projects" data-en="Work">الأعمال</a><a href="#assignments" data-en="Assignments">الاسيمنتات</a><a href="#contact" data-en="Contact">تواصل</a>
 <div class="tools">
 <button id="theme" type="button" aria-label="Toggle dark mode">🌙</button>
 <button id="lang" type="button" aria-label="Switch language">English</button>
@@ -179,6 +242,63 @@ footer{padding:26px 0 46px;color:var(--muted);font-size:14px;text-align:center}
 </div>
 </section>
 
+<section id="assignments">
+<h2 data-en="Assignments &amp; Tasks">الاسيمنتات والتاسكات</h2>
+<p class="txt" data-en="One place to submit your assignments and tasks: upload Word and Excel files, add Google Drive links, and preview your HTML, CSS, JavaScript and C++ code.">مكان واحد لتسليم الاسيمنتات والتاسكات: ارفع ملفات Word و Excel، ضيف لينكات درايف، وشوف أكوادك HTML و CSS و JavaScript و C++ قدامك.</p>
+
+<div class="assign-stats">
+<span class="stat"><b id="a-count">0</b><span data-en="assignments">اسيمنت</span></span>
+<span class="stat"><b id="f-count">0</b><span data-en="files">ملف</span></span>
+<span class="stat"><b id="l-count">0</b><span data-en="links">لينك</span></span>
+</div>
+
+<div class="editbar" id="editbar">
+<span>✏️ <span data-en="Editing:">بتعدّل:</span> <b id="editbar-title"></b></span>
+<button type="button" class="btn small" id="cancel-edit" data-en="Cancel">إلغاء</button>
+</div>
+
+<form class="form-card" id="asg-form" autocomplete="off">
+<div class="form-grid">
+<div class="field full"><label for="a-title" data-en="Assignment / task name">اسم الاسيمنت / التاسك</label><input id="a-title" required data-ph-en="e.g. Database project" placeholder="مثال: بروجكت قواعد البيانات"></div>
+<div class="field"><label for="a-subject" data-en="Subject / type">المادة / النوع</label><input id="a-subject" data-ph-en="e.g. Databases — Task 3" placeholder="مثال: قواعد بيانات — تاسك ٣"></div>
+<div class="field"><label for="a-due" data-en="Due date">تاريخ التسليم</label><input id="a-due" type="date"></div>
+<div class="field full"><label for="a-notes" data-en="Notes">ملاحظات</label><textarea id="a-notes" rows="2" data-ph-en="Any details you want to keep..." placeholder="أي تفاصيل تحب تحتفظ بيها..."></textarea></div>
+</div>
+
+<div class="split">
+<div class="pane">
+<h3>📎 <span data-en="Files">الملفات</span> <span class="mini">Word · Excel · Code · PDF</span></h3>
+<div class="drop" id="drop" tabindex="0" role="button" aria-label="Upload files">
+<strong data-en="Drop files here or click to choose">اسحب الملفات هنا أو اضغط للاختيار</strong>
+<span class="hint">docx · xlsx · pdf · zip · html · css · js · cpp · c · py · txt</span>
+</div>
+<input type="file" id="file-input" multiple hidden accept=".doc,.docx,.xls,.xlsx,.pdf,.ppt,.pptx,.txt,.zip,.rar,.html,.htm,.css,.js,.cpp,.c,.h,.hpp,.py,.json,.md">
+<div class="file-list" id="pending-files"></div>
+</div>
+
+<div class="pane">
+<h3>🔗 <span data-en="Links">اللينكات</span> <span class="mini">Drive · GitHub · أي رابط</span></h3>
+<div class="link-row">
+<input id="link-label" data-ph-en="Link name (optional)" placeholder="اسم اللينك (اختياري)">
+<input id="link-url" class="url" data-ph-en="https://drive.google.com/..." placeholder="https://drive.google.com/...">
+</div>
+<div class="submit-row" style="margin-top:10px">
+<button type="button" class="btn small" id="add-link" data-en="+ Add link">+ ضيف لينك</button>
+</div>
+<div class="link-list" id="pending-links"></div>
+</div>
+</div>
+
+<div class="submit-row">
+<button class="btn main" type="submit" data-en="Save assignment">حفظ الاسيمنت</button>
+<button class="btn small" type="button" id="reset-btn" data-en="Clear">تفريغ</button>
+<span class="hint" data-en="Files and links are saved inside this browser on this device.">الملفات واللينكات بتتحفظ جوه المتصفح على الجهاز ده.</span>
+</div>
+</form>
+
+<div class="assign-list" id="assign-list"></div>
+</section>
+
 <section id="contact" class="contact">
 <h2 data-en="Contact">تواصل معايا</h2>
 <p class="txt" data-en="Have a project or a business that needs a website? Message me and let's talk. 👇">عندك مشروع أو نشاط عايز ليه موقع؟ كلمني ونتفاهم. 👇</p>
@@ -229,5 +349,415 @@ if('IntersectionObserver' in window){
 <a class="wa-float" href="https://wa.me/201019021890" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
 <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.4L3 29l6.8-1.7c1.9 1 4 1.6 6.2 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3z"/><path fill="var(--paper)" d="M12.2 9.5c-.3-.7-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5s-1.4 1.4-1.4 3.4 1.5 3.9 1.7 4.2c.2.3 2.8 4.5 6.9 6.1 3.4 1.4 4.1 1.1 4.9 1 .8-.1 2.5-1 2.9-2s.4-1.8.3-2c-.1-.2-.4-.3-.9-.5s-2.5-1.2-2.9-1.4c-.4-.1-.7-.2-1 .2s-1.1 1.4-1.3 1.7c-.2.3-.5.3-.9.1s-1.8-.7-3.5-2.1c-1.3-1.1-2.2-2.5-2.4-2.9s0-.6.2-.8c.2-.2.4-.5.6-.8.2-.3.3-.5.4-.8.1-.3.1-.6 0-.8-.1-.3-1-2.4-1.3-3.2z"/></svg>
 </a>
+<script>
+/* ===== Assignments & Tasks section ===== */
+(function(){
+'use strict';
+var isAR=function(){return document.documentElement.lang!=='en';};
+var t=function(ar,en){return isAR()?ar:en;};
+var $=function(s,c){return (c||document).querySelector(s);};
+var esc=function(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+var uid=function(){return 'a'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);};
+var fmtSize=function(b){b=b||0;if(b<1024)return b+' B';if(b<1048576)return Math.round(b/1024)+' KB';return (b/1048576).toFixed(1)+' MB';};
+var CODE_EXT=['html','htm','css','js','c','cpp','h','hpp','py','json','md','txt'];
+var extOf=function(n){var i=n.lastIndexOf('.');return i<0?'':n.slice(i+1).toLowerCase();};
+var isCode=function(f){return CODE_EXT.indexOf(extOf(f.name))>=0;};
+var iconOf=function(n){var e=extOf(n);
+if(e==='doc'||e==='docx')return '📘';
+if(e==='xls'||e==='xlsx'||e==='csv')return '📗';
+if(e==='pdf')return '📕';
+if(e==='ppt'||e==='pptx')return '📙';
+if(e==='zip'||e==='rar'||e==='7z')return '🗜️';
+if(['html','htm','css','js','json'].indexOf(e)>=0)return '💻';
+if(['c','cpp','h','hpp'].indexOf(e)>=0)return '⚙️';
+if(e==='py')return '🐍';
+if(['png','jpg','jpeg','gif','webp','svg'].indexOf(e)>=0)return '🖼️';
+return '📄';};
+var isDrive=function(u){return /(^|\/\/)(drive|docs)\.google\.com/i.test(u);};
+
+/* ---------- storage (IndexedDB) ---------- */
+var DBN='emad-assignments',ST='items',dbp=null;
+function openDB(){
+ if(dbp)return dbp;
+ dbp=new Promise(function(res,rej){
+  if(!('indexedDB' in window)){rej(new Error('IndexedDB not supported'));return;}
+  var rq=indexedDB.open(DBN,1);
+  rq.onupgradeneeded=function(){var d=rq.result;if(!d.objectStoreNames.contains(ST))d.createObjectStore(ST,{keyPath:'id'});};
+  rq.onsuccess=function(){res(rq.result);};
+  rq.onerror=function(){rej(rq.error);};
+ });
+ return dbp;
+}
+function store(mode,fn){
+ return openDB().then(function(db){
+  return new Promise(function(res,rej){
+   var tr=db.transaction(ST,mode),st=tr.objectStore(ST),out=null;
+   var rq=fn(st);
+   if(rq)rq.onsuccess=function(){out=rq.result;};
+   tr.oncomplete=function(){res(out);};
+   tr.onerror=function(){rej(tr.error);};
+   tr.onabort=function(){rej(tr.error||new Error('aborted'));};
+  });
+ });
+}
+var allItems=function(){return store('readonly',function(st){return st.getAll();}).then(function(r){return r||[];});};
+var putItem=function(it){return store('readwrite',function(st){return st.put(it);});};
+var delItem=function(id){return store('readwrite',function(st){return st.delete(id);});};
+
+/* ---------- state ---------- */
+var items=[],pending=[],links=[],editing=null;
+
+/* ---------- text helpers ---------- */
+function summary(it){
+ var L=[];
+ L.push((isAR()?'📌 اسيمنت: ':'📌 Assignment: ')+it.title);
+ if(it.subject)L.push('📚 '+it.subject);
+ if(it.due)L.push((isAR()?'🗓 التسليم: ':'🗓 Due: ')+it.due);
+ if(it.notes)L.push('📝 '+it.notes);
+ if(it.links.length){
+  L.push('');L.push(isAR()?'🔗 اللينكات:':'🔗 Links:');
+  it.links.forEach(function(l){L.push('• '+(l.label?l.label+': ':'')+l.url);});
+ }
+ if(it.files.length){
+  L.push('');L.push(isAR()?'📎 الملفات:':'📎 Files:');
+  it.files.forEach(function(f){L.push('• '+f.name+' ('+fmtSize(f.size)+')');});
+ }
+ return L.join('\n');
+}
+var toastEl=null,toastTimer=null;
+function toast(msg){
+ if(!toastEl){toastEl=document.createElement('div');toastEl.className='toast';document.body.appendChild(toastEl);}
+ toastEl.textContent=msg;toastEl.classList.add('on');
+ clearTimeout(toastTimer);toastTimer=setTimeout(function(){toastEl.classList.remove('on');},1800);
+}
+function copyText(txt){
+ if(navigator.clipboard&&navigator.clipboard.writeText){
+  navigator.clipboard.writeText(txt).then(function(){toast(t('اتنسخ ✅','Copied ✅'));},function(){fallbackCopy(txt);});
+ } else fallbackCopy(txt);
+}
+function fallbackCopy(txt){
+ var ta=document.createElement('textarea');ta.value=txt;
+ ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+ try{document.execCommand('copy');toast(t('اتنسخ ✅','Copied ✅'));}catch(e){alert(txt);}
+ ta.remove();
+}
+function download(f){
+ var a=document.createElement('a');a.href=URL.createObjectURL(f.blob);a.download=f.name;
+ document.body.appendChild(a);a.click();a.remove();
+ setTimeout(function(){URL.revokeObjectURL(a.href);},4000);
+}
+
+/* ---------- syntax highlight ---------- */
+var KW={};
+('int float double char void bool long short unsigned signed return if else for while do switch case default break continue class struct public private protected new delete using namespace const static auto true false nullptr typedef template typename try catch throw this sizeof virtual override final export import from function var let async await instanceof typeof null undefined interface enum goto').split(' ').forEach(function(k){KW[k]=1;});
+function escH(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function highlight(code){
+ if(code.length>200000)return escH(code);
+ var re=/\/\*[\s\S]*?\*\/|\/\/[^\n]*|#[ \t]*(?:include|define|pragma|ifndef|endif|ifdef)[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|\b\d[\d.]*\b|[A-Za-z_$][\w$]*/g;
+ var out='',last=0,m,tok,cls;
+ while((m=re.exec(code))){
+  out+=escH(code.slice(last,m.index));
+  tok=m[0];cls='';
+  if(tok.slice(0,2)==='//'||tok.slice(0,2)==='/*'||tok.charAt(0)==='#')cls='tok-c';
+  else if('"\'`'.indexOf(tok.charAt(0))>=0)cls='tok-s';
+  else if(/^\d/.test(tok))cls='tok-n';
+  else if(KW[tok])cls='tok-k';
+  else if(/^[ \t]*\(/.test(code.slice(m.index+tok.length)))cls='tok-f';
+  out+=cls?'<span class="'+cls+'">'+escH(tok)+'</span>':escH(tok);
+  last=m.index+tok.length;
+ }
+ out+=escH(code.slice(last));
+ return out;
+}
+function codeBox(text){
+ var box=document.createElement('div');box.className='codebox';
+ var inner=document.createElement('div');inner.className='codeinner';
+ var gut=document.createElement('div');gut.className='gutter';
+ var n=text.split('\n').length,arr=[];for(var i=1;i<=n;i++)arr.push(i);
+ gut.textContent=arr.join('\n');
+ var pre=document.createElement('pre');pre.innerHTML=highlight(text);
+ inner.appendChild(gut);inner.appendChild(pre);box.appendChild(inner);
+ return box;
+}
+function codeBlock(name,text){
+ var wrap=document.createElement('div');wrap.className='codewrap';
+ wrap.innerHTML='<div class="codehead"><span class="fname">'+esc(name)+'</span><span class="tail"><button type="button" class="icon-btn" title="'+t('نسخ الكود','Copy code')+'">⧉</button></span></div>';
+ wrap.querySelector('button').onclick=function(){copyText(text);};
+ wrap.appendChild(codeBox(text));
+ return wrap;
+}
+function buildDoc(html,css,js){
+ var st=css.map(function(c){return '<style>'+c+'</style>';}).join('');
+ var sc=js.map(function(j){return '<scr'+'ipt>'+j+'</scr'+'ipt>';}).join('');
+ var doc=html;
+ if(/<\/head>/i.test(doc))doc=doc.replace(/<\/head>/i,st+'</head>');else doc=st+doc;
+ if(/<\/body>/i.test(doc))doc=doc.replace(/<\/body>/i,sc+'</body>');else doc+=sc;
+ return doc;
+}
+
+/* ---------- form ---------- */
+function renderPending(){
+ var box=$('#pending-files');box.innerHTML='';
+ pending.forEach(function(f){
+  var row=document.createElement('div');row.className='file-item';
+  row.innerHTML='<span class="ico">'+iconOf(f.name)+'</span><span class="name" title="'+esc(f.name)+'">'+esc(f.name)+'</span><span class="meta">'+fmtSize(f.size)+'</span>';
+  var b=document.createElement('button');b.type='button';b.className='icon-btn';b.textContent='✕';b.title=t('إزالة','Remove');
+  b.onclick=function(){pending=pending.filter(function(x){return x!==f;});renderPending();};
+  row.appendChild(b);box.appendChild(row);
+ });
+}
+function renderLinks(){
+ var box=$('#pending-links');box.innerHTML='';
+ links.forEach(function(l){
+  var row=document.createElement('div');row.className='link-item';
+  row.innerHTML='<span class="ico">'+(isDrive(l.url)?'🟢':'🔗')+'</span><a href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(l.url)+'</a>';
+  if(l.label){var sp=document.createElement('span');sp.className='mini';sp.textContent=l.label;row.appendChild(sp);}
+  var b=document.createElement('button');b.type='button';b.className='icon-btn';b.textContent='✕';b.title=t('إزالة','Remove');
+  b.onclick=function(){links=links.filter(function(x){return x!==l;});renderLinks();};
+  row.appendChild(b);box.appendChild(row);
+ });
+}
+function addFiles(files){
+ Array.prototype.forEach.call(files,function(f){
+  if(f.size>25*1024*1024){alert(t('الملف أكبر من ٢٥ ميجا: ','File is larger than 25MB: ')+f.name);return;}
+  pending.push({name:f.name,type:f.type||'',size:f.size,blob:f});
+ });
+ renderPending();
+}
+function addLink(){
+ var lu=$('#link-url'),ll=$('#link-label');
+ var url=(lu.value||'').trim();
+ if(!url){lu.focus();return;}
+ if(!/^https?:\/\//i.test(url))url='https://'+url.replace(/^\/+/,'');
+ try{new URL(url);}catch(e){alert(t('اللينك مش صحيح','Invalid link'));return;}
+ links.push({label:(ll.value||'').trim(),url:url});
+ lu.value='';ll.value='';renderLinks();lu.focus();
+}
+function resetForm(){
+ $('#a-title').value='';$('#a-subject').value='';$('#a-due').value='';$('#a-notes').value='';
+ pending=[];links=[];editing=null;
+ renderPending();renderLinks();
+ $('#editbar').classList.remove('on');
+}
+function save(ev){
+ ev.preventDefault();
+ var title=$('#a-title').value.trim();
+ if(!title){$('#a-title').focus();return;}
+ var data={
+  title:title,
+  subject:$('#a-subject').value.trim(),
+  due:$('#a-due').value,
+  notes:$('#a-notes').value.trim(),
+  links:links.slice(),
+  files:pending.slice(),
+  createdAt:editing?(editing.createdAt||Date.now()):Date.now(),
+  updatedAt:Date.now()
+ };
+ data.id=editing?editing.id:uid();
+ putItem(data).then(function(){
+  resetForm();return load();
+ }).then(function(){
+  toast(t('اتحفظ ✅','Saved ✅'));
+ }).catch(function(e){
+  alert(t('مش قادر أحفظ: ','Could not save: ')+(e&&e.message?e.message:e));
+ });
+}
+function startEdit(it){
+ editing=it;
+ $('#a-title').value=it.title;
+ $('#a-subject').value=it.subject||'';
+ $('#a-due').value=it.due||'';
+ $('#a-notes').value=it.notes||'';
+ pending=it.files.slice();links=it.links.slice();
+ renderPending();renderLinks();
+ $('#editbar-title').textContent=it.title;
+ $('#editbar').classList.add('on');
+ $('#assignments').scrollIntoView({behavior:'smooth',block:'start'});
+ $('#a-title').focus({preventScroll:true});
+}
+function removeItem(it){
+ if(!confirm(t('تأكيد حذف الاسيمنت: ','Delete assignment: ')+it.title+' ؟'))return;
+ delItem(it.id).then(function(){return load();}).then(function(){toast(t('اتحذف','Deleted'));}).catch(function(e){alert(e.message);});
+}
+
+/* ---------- cards ---------- */
+function updateStats(){
+ var fc=0,lc=0;
+ items.forEach(function(it){fc+=it.files.length;lc+=it.links.length;});
+ $('#a-count').textContent=items.length;
+ $('#f-count').textContent=fc;
+ $('#l-count').textContent=lc;
+}
+function switchTab(art,name){
+ Array.prototype.forEach.call(art.querySelectorAll('.tabs button'),function(b){b.classList.toggle('on',b.dataset.tab===name);});
+ Array.prototype.forEach.call(art.querySelectorAll('.tabpane'),function(p){p.classList.toggle('on',p.dataset.pane===name);});
+}
+function renderCodePane(pane,it){
+ var code=it.files.filter(isCode);
+ if(!code.length){
+  pane.innerHTML='<div class="empty">'+t('مفيش ملفات كود. ارفع ملف html / css / js / cpp وشوفه هنا.','No code files. Upload html / css / js / cpp to preview it here.')+'</div>';
+  return;
+ }
+ pane.innerHTML='<div class="empty">'+t('بتحميل الأكواد...','Loading code...')+'</div>';
+ Promise.all(code.map(function(f){
+  return f.blob.text().then(function(x){return {f:f,text:x};},function(){return {f:f,text:''};});
+ })).then(function(list){
+  pane.innerHTML='';
+  var html=list.filter(function(x){return /^(html|htm)$/.test(extOf(x.f.name));});
+  var css=list.filter(function(x){return extOf(x.f.name)==='css';}).map(function(x){return x.text;});
+  var js=list.filter(function(x){return extOf(x.f.name)==='js';}).map(function(x){return x.text;});
+  if(html.length){
+   var h=html[0];
+   var wrap=document.createElement('div');wrap.className='codewrap';
+   wrap.innerHTML='<div class="codehead"><span class="fname">'+esc(h.f.name)+'</span><span class="tail"><button type="button" class="btn small" data-v="preview">👁️ '+t('معاينة حية','Live preview')+'</button><button type="button" class="btn small" data-v="code">{ } '+t('كود','Code')+'</button></span></div>';
+   var holder=document.createElement('div');wrap.appendChild(holder);pane.appendChild(wrap);
+   var fr=document.createElement('iframe');fr.className='preview';
+   fr.setAttribute('sandbox','allow-scripts allow-forms allow-modals');
+   fr.srcdoc=buildDoc(h.text,css,js);
+   var cbox=codeBox(h.text);
+   holder.appendChild(fr);
+   wrap.querySelector('[data-v="preview"]').onclick=function(){holder.innerHTML='';holder.appendChild(fr);};
+   wrap.querySelector('[data-v="code"]').onclick=function(){holder.innerHTML='';holder.appendChild(cbox);};
+   html.slice(1).forEach(function(x){pane.appendChild(codeBlock(x.f.name,x.text));});
+  } else {
+   list.forEach(function(x){pane.appendChild(codeBlock(x.f.name,x.text));});
+  }
+  if(html.length){
+   list.forEach(function(x){
+    if(/^(html|htm)$/.test(extOf(x.f.name)))return;
+    if(!html.length)return;
+    pane.appendChild(codeBlock(x.f.name,x.text));
+   });
+  }
+ });
+}
+function card(it){
+ var codeFiles=it.files.filter(isCode);
+ var driveLinks=it.links.filter(function(l){return isDrive(l.url);}).length;
+ var art=document.createElement('article');art.className='assign';art.dataset.id=it.id;
+
+ var head=document.createElement('div');
+ head.className='assign-head-row';head.setAttribute('role','button');head.tabIndex=0;
+ head.innerHTML='<div style="flex:1;min-width:0">'+
+  '<h3>'+esc(it.title)+'</h3>'+
+  ((it.subject||it.due)?'<div class="subj">'+esc(it.subject||'')+(it.due?(it.subject?' · ':'')+esc(it.due):'')+'</div>':'')+
+  '<div class="chiprow">'+
+   '<span class="mini">📎 '+it.files.length+' '+t('ملف','files')+'</span>'+
+   '<span class="mini">🔗 '+it.links.length+' '+t('لينك','links')+'</span>'+
+   (codeFiles.length?'<span class="mini">💻 '+codeFiles.length+' '+t('كود','code')+'</span>':'')+
+   (driveLinks?'<span class="mini drive">Drive</span>':'')+
+  '</div>'+
+ '</div>'+
+ '<span class="mini">'+new Date(it.createdAt||Date.now()).toLocaleDateString(isAR()?'ar-EG':'en-GB')+'</span>';
+ art.appendChild(head);
+
+ var body=document.createElement('div');body.className='assign-body';
+ body.innerHTML='<div class="tabs">'+
+   '<button type="button" data-tab="files" class="on">📎 '+t('الملفات','Files')+'</button>'+
+   '<button type="button" data-tab="links">🔗 '+t('اللينكات','Links')+'</button>'+
+   '<button type="button" data-tab="code">💻 '+t('الأكواد','Code')+'</button>'+
+  '</div>'+
+  '<div class="tabpane on" data-pane="files"></div>'+
+  '<div class="tabpane" data-pane="links"></div>'+
+  '<div class="tabpane" data-pane="code"></div>'+
+  '<div class="submit-row">'+
+   '<a class="btn small" target="_blank" rel="noopener" data-share="wa">💬 '+t('إرسال واتساب','WhatsApp')+'</a>'+
+   '<a class="btn small" data-share="mail">✉️ '+t('إرسال إيميل','Email')+'</a>'+
+   '<button type="button" class="btn small" data-act="copy">📋 '+t('نسخ الملخص','Copy summary')+'</button>'+
+   '<button type="button" class="btn small" data-act="edit">✏️ '+t('تعديل','Edit')+'</button>'+
+   '<button type="button" class="btn small" data-act="del" style="border-color:var(--margin);color:var(--margin)">🗑️ '+t('حذف','Delete')+'</button>'+
+  '</div>';
+ art.appendChild(body);
+
+ var pf=$('[data-pane="files"]',body);
+ if(it.files.length){
+  it.files.forEach(function(f){
+   var row=document.createElement('div');row.className='file-item';
+   row.innerHTML='<span class="ico">'+iconOf(f.name)+'</span><span class="name" title="'+esc(f.name)+'">'+esc(f.name)+'</span><span class="meta">'+fmtSize(f.size)+'</span>';
+   var dl=document.createElement('button');dl.type='button';dl.className='btn small';dl.textContent='⬇️ '+t('تنزيل','Download');
+   dl.onclick=function(){download(f);};row.appendChild(dl);
+   if(isCode(f)){
+    var pv=document.createElement('button');pv.type='button';pv.className='btn small';pv.textContent='👁️ '+t('كود','View');
+    pv.onclick=function(){switchTab(art,'code');};row.appendChild(pv);
+   }
+   pf.appendChild(row);
+  });
+ } else pf.innerHTML='<div class="empty">'+t('مفيش ملفات مرفوعة.','No files uploaded.')+'</div>';
+
+ var pl=$('[data-pane="links"]',body);
+ if(it.links.length){
+  it.links.forEach(function(l){
+   var row=document.createElement('div');row.className='link-item';
+   row.innerHTML='<span class="ico">'+(isDrive(l.url)?'🟢':'🔗')+'</span>'+(l.label?'<span class="mini">'+esc(l.label)+'</span>':'')+'<a href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(l.url)+'</a>';
+   var cp=document.createElement('button');cp.type='button';cp.className='icon-btn';cp.textContent='⧉';cp.title=t('نسخ اللينك','Copy link');
+   cp.onclick=function(){copyText(l.url);};row.appendChild(cp);
+   pl.appendChild(row);
+  });
+ } else pl.innerHTML='<div class="empty">'+t('مفيش لينكات.','No links.')+'</div>';
+
+ renderCodePane($('[data-pane="code"]',body),it);
+
+ var txt=summary(it);
+ $('[data-share="wa"]',body).href='https://wa.me/?text='+encodeURIComponent(txt);
+ $('[data-share="mail"]',body).href='mailto:?subject='+encodeURIComponent(it.title)+'&body='+encodeURIComponent(txt);
+ $('[data-act="copy"]',body).onclick=function(){copyText(txt);};
+ $('[data-act="edit"]',body).onclick=function(){startEdit(it);};
+ $('[data-act="del"]',body).onclick=function(){removeItem(it);};
+
+ head.addEventListener('click',function(){art.classList.toggle('open');});
+ head.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();art.classList.toggle('open');}});
+ Array.prototype.forEach.call(body.querySelectorAll('.tabs button'),function(b){
+  b.onclick=function(){switchTab(art,b.dataset.tab);};
+ });
+ return art;
+}
+function renderCards(){
+ var box=$('#assign-list');
+ if(!items.length){
+  box.innerHTML='<div class="empty">'+t('مفيش اسيمنتات لسه — ضيف أول اسيمنت من الفورم فوق 👆','No assignments yet — add your first one above 👆')+'</div>';
+  updateStats();return;
+ }
+ box.innerHTML='';
+ items.slice().sort(function(a,b){return (b.updatedAt||b.createdAt||0)-(a.updatedAt||a.createdAt||0);}).forEach(function(it){box.appendChild(card(it));});
+ updateStats();
+}
+function load(){
+ return allItems().then(function(list){
+  items=list;renderCards();
+ }).catch(function(){
+  $('#assign-list').innerHTML='<div class="empty">'+t('المتصفح مش سامح بالتخزين المحلي هنا. جرّب تفتح الموقع من اللينك المباشر.','Browser storage is blocked here. Try opening the live site.')+'</div>';
+ });
+}
+
+/* ---------- wiring ---------- */
+$('#asg-form').addEventListener('submit',save);
+$('#add-link').addEventListener('click',addLink);
+$('#link-url').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();addLink();}});
+$('#link-label').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();addLink();}});
+$('#cancel-edit').addEventListener('click',resetForm);
+$('#reset-btn').addEventListener('click',function(){if(confirm(t('تفريغ الفورم؟','Clear the form?')))resetForm();});
+var drop=$('#drop'),fileInput=$('#file-input');
+drop.addEventListener('click',function(){fileInput.click();});
+drop.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();fileInput.click();}});
+fileInput.addEventListener('change',function(){addFiles(fileInput.files);fileInput.value='';});
+['dragenter','dragover'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('over');});});
+['dragleave','drop'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove('over');});});
+drop.addEventListener('drop',function(e){if(e.dataTransfer&&e.dataTransfer.files)addFiles(e.dataTransfer.files);});
+
+/* bilingual placeholders + re-render on language change */
+Array.prototype.forEach.call(document.querySelectorAll('[data-ph-en]'),function(e){e.setAttribute('data-ph-ar',e.placeholder||'');});
+var lastLang=document.documentElement.lang;
+new MutationObserver(function(){
+ if(document.documentElement.lang===lastLang)return;
+ lastLang=document.documentElement.lang;
+ Array.prototype.forEach.call(document.querySelectorAll('[data-ph-en]'),function(e){
+  e.placeholder=isAR()?(e.getAttribute('data-ph-ar')||''):e.getAttribute('data-ph-en');
+ });
+ renderPending();renderLinks();renderCards();
+}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+
+load();
+})();
+</script>
 </body>
 </html>
