@@ -4,6 +4,7 @@ Portfolio / موقع شخصي — مبرمج ومطوّر ويب وطالب في
 
 - البرمجيات المستخدمة: HTML + CSS + JavaScript نضيف (ملف واحد بدون مكتبات)
 - متجاوب مع الموبايل، يدعم العربي والإنجليزي (RTL/LTR)، وضع داكن/فاتح، وقابل للطباعة كـ CV
+- قسم **الاسيمنتات والتاسكات**: رفع ملفات Word/Excel وأكواد، لينكات Google Drive، ومعاينة حية لـ HTML/CSS/JS و C++
 - التواصل: ahmedabad15th@gmail.com · واتساب: +20 10 1902 1890
 
 Built with clean HTML, CSS & JavaScript. Supports Arabic/English, dark mode, and print-to-CV.
