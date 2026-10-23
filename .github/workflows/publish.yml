@@ -1,0 +1,84 @@
+name: Publish assignment
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: publish-assignment
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: startsWith(github.event.issue.title, '[اسيمنت]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const { execSync } = require('child_process');
+            const body = context.payload.issue.body || '';
+            const m = body.match(/```json\s*([\s\S]*?)```/i);
+            if (!m) {
+              core.setFailed('لا يوجد بلوك JSON في نص الـ issue');
+              return;
+            }
+            let item;
+            try {
+              item = JSON.parse(m[1]);
+            } catch (e) {
+              core.setFailed('JSON غير صحيح: ' + e.message);
+              return;
+            }
+            if (!item || !item.title) {
+              core.setFailed('الاسيمنت لازم يكون له عنوان');
+              return;
+            }
+            item.id = 'asg-' + Date.now();
+            item.createdAt = new Date().toISOString();
+            item.title = String(item.title).slice(0, 200);
+            item.subject = String(item.subject || '').slice(0, 200);
+            item.due = String(item.due || '').slice(0, 40);
+            item.notes = String(item.notes || '').slice(0, 2000);
+            item.links = Array.isArray(item.links)
+              ? item.links
+                  .filter((l) => l && /^https?:\/\//i.test(String(l.url || '')))
+                  .slice(0, 30)
+                  .map((l) => ({ label: String(l.label || '').slice(0, 120), url: String(l.url) }))
+              : [];
+
+            const file = 'assignments.json';
+            let data = { updated: '', items: [] };
+            try {
+              data = JSON.parse(fs.readFileSync(file, 'utf8'));
+            } catch (e) {}
+            if (!Array.isArray(data.items)) data.items = [];
+            data.items = data.items.filter((x) => x && x.id !== item.id);
+            data.items.unshift(item);
+            data.updated = new Date().toISOString().slice(0, 10);
+            fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
+
+            execSync('git config user.name "github-actions[bot]"');
+            execSync('git config user.email "41898282+github-actions[bot]@users.noreply.github.com"');
+            execSync('git add assignments.json');
+            execSync('git commit -m "Publish assignment"');
+            execSync('git push');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '✅ تم نشر الاسيمنت على الموقع:\nhttps://ahmedabad15th-maker.github.io/emad-portfolio/#assignments\n\n(الموقع بياخد من ٣٠ لـ ٦٠ ثانية لحد ما يتحدّث)'
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });
