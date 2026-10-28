@@ -826,10 +826,10 @@ function loadPub(){
   .then(function(d){pubItems=(d&&Array.isArray(d.items))?d.items:[];renderPub();})
   .catch(function(){pubItems=[];renderPub();});
 }
-function publish(it){
- var payload={title:it.title,subject:it.subject||'',due:it.due||'',notes:it.notes||'',links:(it.links||[]).map(function(l){return {label:l.label||'',url:l.url};})};
+function unpublish(it){
+ var payload={id:it.id||''};
  var body='انسخ الجزء اللي تحت زي ما هو (بلوك json) — ماتغيّرش فيه حاجة.\n\n```json\n'+JSON.stringify(payload,null,2)+'\n```';
- var url='https://github.com/ahmedabad15th-maker/emad-portfolio/issues/new?title='+encodeURIComponent('[اسيمنت] '+(it.title||'assignment'))+'&body='+encodeURIComponent(body);
+ var url='https://github.com/ahmedabad15th-maker/emad-portfolio/issues/new?title='+encodeURIComponent('[حذف-اسيمنت] '+(it.title||'assignment'))+'&body='+encodeURIComponent(body);
  var w=window.open(url,'_blank','noopener');
  if(!w){copyText(url);toast(t('المتصفح منع النافذة — اللينك اتنسخ، الصقه في تاب جديد.','Popup blocked — link copied, open it in a new tab.'));}
 }
