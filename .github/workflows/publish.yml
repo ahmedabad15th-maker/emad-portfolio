@@ -1,4 +1,4 @@
-name: Publish assignment
+name: Publish or remove assignment
 
 on:
   issues:
@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   publish:
-    if: startsWith(github.event.issue.title, '[اسيمنت]')
+    if: startsWith(github.event.issue.title, '[اسيمنت]') || startsWith(github.event.issue.title, '[حذف-اسيمنت]')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +23,76 @@ jobs:
           script: |
             const fs = require('fs');
             const { execSync } = require('child_process');
+            const title = context.payload.issue.title || '';
             const body = context.payload.issue.body || '';
+            const file = 'assignments.json';
+
+            let data = { updated: '', items: [] };
+            try {
+              data = JSON.parse(fs.readFileSync(file, 'utf8'));
+            } catch (e) {}
+            if (!Array.isArray(data.items)) data.items = [];
+
+            // DELETE
+            if (title.startsWith('[حذف-اسيمنت]')) {
+              const m = body.match(/```json\s*([\s\S]*?)```/i);
+              let del = {};
+              if (m) {
+                try { del = JSON.parse(m[1]); } catch (e) {}
+              }
+              if (!del.id && body) {
+                const mid = body.match(/"id"\s*:\s*"([^"]+)"/i);
+                if (mid) del.id = mid[1];
+              }
+              if (!del.id) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: '❌ مفيش ID للسيمنت عشان نحذفه، ضيف "id" جوه بلوك JSON وحاول تاني.'
+                });
+                return;
+              }
+              const before = data.items.length;
+              data.items = data.items.filter((x) => x && x.id !== del.id);
+              if (data.items.length === before) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: '⚠️ ماقدرناش نلاقي الاسيمنت ده، ممكن يكون اتشال قبل كده.'
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  state: 'closed'
+                });
+                return;
+              }
+              data.updated = new Date().toISOString().slice(0, 10);
+              fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
+              execSync('git config user.name "github-actions[bot]"');
+              execSync('git config user.email "41898282+github-actions[bot]@users.noreply.github.com"');
+              execSync('git add assignments.json');
+              execSync('git commit -m "Remove published assignment"');
+              execSync('git push');
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: '✅ تم حذف الاسيمنت من "الاسيمنتات المنشورة". هيختفي من الموقع خلال دقيقة.'
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                state: 'closed'
+              });
+              return;
+            }
+
+            // PUBLISH
             const m = body.match(/```json\s*([\s\S]*?)```/i);
             if (!m) {
               core.setFailed('لا يوجد بلوك JSON في نص الـ issue');
@@ -53,12 +122,6 @@ jobs:
                   .map((l) => ({ label: String(l.label || '').slice(0, 120), url: String(l.url) }))
               : [];
 
-            const file = 'assignments.json';
-            let data = { updated: '', items: [] };
-            try {
-              data = JSON.parse(fs.readFileSync(file, 'utf8'));
-            } catch (e) {}
-            if (!Array.isArray(data.items)) data.items = [];
             data.items = data.items.filter((x) => x && x.id !== item.id);
             data.items.unshift(item);
             data.updated = new Date().toISOString().slice(0, 10);
