@@ -2,6 +2,48 @@
   "updated": "2026-10-28",
   "items": [
     {
+      "id": "asg-2",
+      "title": "اسيمنت 2",
+      "subject": "Web Task",
+      "due": "",
+      "notes": "يحتوي على index.html و page2.html واللينك بينهما شغال",
+      "links": [
+        {
+          "label": "عرض الاسيمنت",
+          "url": "./assignments/assignment-2/index.html"
+        }
+      ],
+      "createdAt": "2026-10-28T12:10:00.000Z"
+    },
+    {
+      "id": "asg-3",
+      "title": "اسيمنت 3",
+      "subject": "Web Task",
+      "due": "",
+      "notes": "جدول HTML",
+      "links": [
+        {
+          "label": "عرض الاسيمنت",
+          "url": "./assignments/assignment-3/table.html"
+        }
+      ],
+      "createdAt": "2026-10-28T12:11:00.000Z"
+    },
+    {
+      "id": "asg-google",
+      "title": "Google Link",
+      "subject": "Web Task",
+      "due": "",
+      "notes": "يحتوي على لينك يفتح Google",
+      "links": [
+        {
+          "label": "عرض الاسيمنت",
+          "url": "./assignments/assignment-google/index.html"
+        }
+      ],
+      "createdAt": "2026-10-28T12:12:00.000Z"
+    },
+    {
       "id": "asg-index-html",
       "title": "Index.html",
       "subject": "Web Task",
