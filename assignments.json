@@ -6,11 +6,19 @@
       "title": "اسيمنت 4",
       "subject": "Web Task",
       "due": "",
-      "notes": "فورم تسجيل (Registration) مع صفحة الشروط وصفحة الشكر — تقدر تجرب التسجيل وتشوف اللي بيحصل.",
+      "notes": "فورم تسجيل (Registration) فيه صفحة شروط وأحكام وصفحة شكر. جرّب تكتب البيانات واضغط التسجيل، أو افتح كل صفحة من اللينكات اللي تحت.",
       "links": [
         {
-          "label": "عرض الاسيمنت",
+          "label": "فورم التسجيل",
           "url": "./assignments/assignment-4/registration.html"
+        },
+        {
+          "label": "الشروط والأحكام",
+          "url": "./assignments/assignment-4/terms.html"
+        },
+        {
+          "label": "صفحة الشكر",
+          "url": "./assignments/assignment-4/Thankyou.html"
         }
       ],
       "createdAt": "2026-11-14T10:00:00.000Z"
