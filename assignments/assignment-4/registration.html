@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registration</title>
+</head>
+<body>
+
+  <h2 align="center">Registration</h2>
+  <hr>
+
+  <form action="Thankyou.html" method="get">
+
+    <!-- Hidden field: User ID -->
+    <input type="hidden" name="userId" value="1001">
+
+    <table border="1" cellpadding="6" cellspacing="0" align="center" width="600">
+
+      <!-- ===== Personal Data ===== -->
+      <tr>
+        <th colspan="2">Personal Data</th>
+      </tr>
+
+      <tr>
+        <td width="35%"><label for="fname">First Name</label></td>
+        <td>
+          <input type="text" id="fname" name="firstName"
+                 required
+                 pattern="[A-Za-z]+"
+                 title="Letters only (A-Z)">
+        </td>
+      </tr>
+
+      <tr>
+        <td><label for="lname">Last Name</label></td>
+        <td>
+          <input type="text" id="lname" name="lastName"
+                 required
+                 pattern="[A-Za-z]+"
+                 title="Letters only (A-Z)">
+        </td>
+      </tr>
+
+      <tr>
+        <td><label for="email">Email</label></td>
+        <td>
+          <input type="email" id="email" name="email"
+                 placeholder="example@mail.com"
+                 required
+                 pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
+                 title="Enter a valid email, e.g. name@example.com">
+        </td>
+      </tr>
+
+      <tr>
+        <td><label for="pass">Password</label></td>
+        <td>
+          <input type="password" id="pass" name="password"
+                 required
+                 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}"
+                 title="At least 8 characters with one uppercase letter, one lowercase letter, one number, and one special character">
+        </td>
+      </tr>
+
+      <tr>
+        <td><label for="repass">Repeat Password</label></td>
+        <td>
+          <input type="password" id="repass" name="repeatPassword"
+                 required
+                 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}"
+                 title="At least 8 characters with one uppercase letter, one lowercase letter, one number, and one special character">
+        </td>
+      </tr>
+
+      <tr>
+        <td><label for="phone">Phone Number</label></td>
+        <td>
+          <input type="tel" id="phone" name="phone"
+                 placeholder="01012345678"
+                 required
+                 pattern="01[0125][0-9]{8}"
+                 maxlength="11"
+                 title="Egyptian number: 11 digits starting with 010, 011, 012, or 015">
+        </td>
+      </tr>
+
+      <tr>
+        <td><label for="gpa">GPA</label></td>
+        <td>
+          <input type="number" id="gpa" name="gpa"
+                 required
+                 min="0" max="4" step="0.1"
+                 placeholder="0.0 - 4.0">
+        </td>
+      </tr>
+
+      <tr>
+        <td><label for="dob">Date of Birth</label></td>
+        <td>
+          <input type="date" id="dob" name="dob">
+        </td>
+      </tr>
+
+      <tr>
+        <td><label for="pic">Upload Picture</label></td>
+        <td>
+          <input type="file" id="pic" name="picture" accept="image/*">
+        </td>
+      </tr>
+
+      <tr>
+        <td>Gender</td>
+        <td>
+          <input type="radio" id="male" name="gender" value="Male">
+          <label for="male">Male</label>
+          <br>
+          <input type="radio" id="female" name="gender" value="Female">
+          <label for="female">Female</label>
+        </td>
+      </tr>
+
+      <tr>
+        <td><label for="faculty">Faculty</label></td>
+        <td>
+          <select id="faculty" name="faculty">
+            <option value="cs">Computer Science</option>
+            <option value="accounting">Accounting &amp; Information</option>
+            <option value="engineering">Engineering</option>
+            <option value="medicine">Medicine</option>
+            <option value="commerce">Commerce</option>
+            <option value="science">Science</option>
+          </select>
+        </td>
+      </tr>
+
+      <!-- ===== Interests ===== -->
+      <tr>
+        <th colspan="2">Interests</th>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="checkbox" id="programming" name="interests" value="Programming">
+          <label for="programming">Programming</label>
+        </td>
+        <td>
+          <input type="checkbox" id="drawing" name="interests" value="Drawing">
+          <label for="drawing">Drawing</label>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="checkbox" id="reading" name="interests" value="Reading">
+          <label for="reading">Reading</label>
+        </td>
+        <td>
+          <input type="checkbox" id="football" name="interests" value="Playing Football">
+          <label for="football">Playing Football</label>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="checkbox" id="swimming" name="interests" value="Swimming">
+          <label for="swimming">Swimming</label>
+        </td>
+        <td>
+          <input type="checkbox" id="music" name="interests" value="Music">
+          <label for="music">Music</label>
+        </td>
+      </tr>
+
+      <!-- ===== About you ===== -->
+      <tr>
+        <th colspan="2">About you</th>
+      </tr>
+
+      <tr>
+        <td colspan="2" align="center">
+          <textarea id="about" name="about" rows="4" cols="55"></textarea>
+        </td>
+      </tr>
+
+      <!-- ===== Buttons ===== -->
+      <tr>
+        <td colspan="2" align="center">
+          <input type="submit" value="Ok">
+          <input type="reset" value="Cancel">
+        </td>
+      </tr>
+
+    </table>
+
+    <!-- Terms and conditions -->
+    <p align="center">
+      <input type="checkbox" id="terms" name="terms" required>
+      <label for="terms">
+        <a href="terms.html" target="_blank">I agreed to the terms and conditions</a>
+      </label>
+    </p>
+
+  </form>
+
+</body>
+</html>
