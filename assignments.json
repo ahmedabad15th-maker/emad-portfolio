@@ -1,6 +1,20 @@
 {
-  "updated": "2026-10-28",
+  "updated": "2026-11-14",
   "items": [
+    {
+      "id": "asg-4",
+      "title": "اسيمنت 4",
+      "subject": "Web Task",
+      "due": "",
+      "notes": "فورم تسجيل (Registration) مع صفحة الشروط وصفحة الشكر — تقدر تجرب التسجيل وتشوف اللي بيحصل.",
+      "links": [
+        {
+          "label": "عرض الاسيمنت",
+          "url": "./assignments/assignment-4/registration.html"
+        }
+      ],
+      "createdAt": "2026-11-14T10:00:00.000Z"
+    },
     {
       "id": "asg-2",
       "title": "اسيمنت 2",
